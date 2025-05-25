@@ -1,0 +1,13 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: hello-world-go
+runtime: go
+image: fabiocalt/hello-world-go
+namespace: default
+created: 2025-05-22T11:21:09.414246316+02:00
+build:
+  builder: pack
+deploy:
+  namespace: default
+  image: fabiocalt/hello-world-go@sha256:9f574bf443bb7479cffec2a32855d894591276fa2c7084d933723a5334c47286

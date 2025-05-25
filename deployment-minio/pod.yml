@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: minio-uploader
+spec:
+  containers:
+  - name: uploader
+    image: minio/mc
+    command: ["sleep", "3600"]  # keep pod running so you can exec into it
+

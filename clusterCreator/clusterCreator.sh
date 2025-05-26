@@ -34,19 +34,24 @@ echo "🛠️ Patching config-domain ConfigMap..."
 kubectl patch configmap/config-domain \
   --namespace knative-serving \
   --type merge \
-  -p "{\"data\": {\"$DOMAIN\": \"\"}}"
+  --patch '{"data":{"127.0.0.1.sslip.io":""}}'
 
-echo "🔍 Validating the domain patch..."
-DOMAIN_PRESENT=$(kubectl get configmap config-domain \
-  --namespace knative-serving \
-  -o jsonpath="{.data['$DOMAIN']}")
+echo "✅ Patch applied. Validating..."
 
-if [[ -z "$DOMAIN_PRESENT" ]]; then
-  echo "❌ Validation failed: '$DOMAIN' not found in config-domain"
-  exit 1
+# Get the configmap and search for the key
+output=$(kubectl describe configmap/config-domain --namespace knative-serving)
+
+if echo "$output" | grep -q "127.0.0.1.sslip.io"; then
+    echo "✅ Validation successful: 127.0.0.1.sslip.io found in config-domain."
 else
-  echo "✅ Validation successful: '$DOMAIN' is present in config-domain"
+    echo "❌ Validation failed: 127.0.0.1.sslip.io not found in config-domain."
+    exit 1
 fi
+
+
+echo 'Waiting for pod to run'
+sleep 300
+
 
 # Shared pod check function
 check_pod() {

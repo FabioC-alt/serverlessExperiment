@@ -3,7 +3,11 @@
 specVersion: 0.36.0
 name: minio-func
 runtime: go
-created: 2025-05-26T12:56:40.79554359+02:00
-
 image: docker.io/fabiocalt/minio-func
-
+namespace: default
+created: 2025-05-26T12:56:40.79554359+02:00
+build:
+  builder: pack
+deploy:
+  namespace: default
+  image: docker.io/fabiocalt/minio-func@sha256:7310c8a9e83ca7225c561fd2ed24bf34af248e1ae5b6016da45333b28f4d08b5

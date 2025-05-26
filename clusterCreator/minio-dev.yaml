@@ -7,18 +7,13 @@ metadata:
     name: minio-dev # Change this value to match metadata.name
 ---
 # Deploys a new MinIO Pod into the metadata.namespace Kubernetes namespace
-#
-# The `spec.containers[0].args` contains the command run on the pod
-# The `/data` directory corresponds to the `spec.containers[0].volumeMounts[0].mountPath`
-# That mount path corresponds to a Kubernetes HostPath which binds `/data` to a local drive or volume on the worker node where the pod runs
-# 
 apiVersion: v1
 kind: Pod
 metadata:
   labels:
     app: minio
   name: minio
-  namespace: minio-dev # Change this value to match the namespace metadata.name
+  namespace: minio-dev
 spec:
   containers:
   - name: minio
@@ -29,18 +24,18 @@ spec:
     args: 
     - minio server /data --console-address :9090
     env:
-      - name: MINIO_ROOT_USER
-        value: "minioadmin"
-      - name: MINIO_ROOT_PASSWORD
-        value: "minioadmin123"
-
+    - name: MINIO_ROOT_USER
+      value: "minioadmin" # Replace with your desired access key
+    - name: MINIO_ROOT_PASSWORD
+      value: "minioadmin123" # Replace with your desired secret key
     volumeMounts:
     - mountPath: /data
-      name: localvolume # Corresponds to the `spec.volumes` Persistent Volume
+      name: localvolume
   nodeSelector:
-    kubernetes.io/hostname: kind-worker # Specify a node label associated to the Worker Node on which you want to deploy the pod.
+    kubernetes.io/hostname: kind-worker
   volumes:
   - name: localvolume
-    hostPath: # MinIO generally recommends using locally-attached volumes
-      path: /mnt/disk1/data # Specify a path to a local drive or volume on the Kubernetes worker node
-      type: DirectoryOrCreate # The path to the last directory must exist
+    hostPath:
+      path: /mnt/disk1/data
+      type: DirectoryOrCreate
+

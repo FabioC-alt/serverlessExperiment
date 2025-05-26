@@ -1,0 +1,10 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: deployment-hello-py
+runtime: python
+created: 2025-05-26T17:08:00.366336669+02:00
+
+
+image: fabiocalt/hello-world-py:latest
+

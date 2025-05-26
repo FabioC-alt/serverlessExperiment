@@ -8,9 +8,9 @@ echo '🟢 Creating a cluster with kind'
 kind create cluster --config deployment.yml
 
 echo '🟢 Creating serving resources'
-kubectl apply -f serving-crds.yml
-kubectl apply -f serving-core.yml
-kubectl apply -f kourier.yaml
+kubectl apply -f serving-crds.yml --quiet
+kubectl apply -f serving-core.yml --quiet
+kubectl apply -f kourier.yaml --quiet
 
 echo '🟢 Setting Kourier as default networking layer'
 kubectl patch configmap/config-network \

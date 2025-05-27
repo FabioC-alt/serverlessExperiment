@@ -3,11 +3,11 @@
 specVersion: 0.36.0
 name: hello-world-go
 runtime: go
-image: fabiocalt/hello-world-go
+image: fabiocalt/hello-world-go:latest
 namespace: default
 created: 2025-05-22T11:21:09.414246316+02:00
 build:
   builder: pack
 deploy:
   namespace: default
-  image: fabiocalt/hello-world-go@sha256:14cf888a0e2b3d4721bb6abe737db7e282dee40b83dade2c630151ae956b6bde
+  image: fabiocalt/hello-world-go@sha256:4e84637d6009d1a3bc1be1892d406661cd321d628084b970875a7e6e79d47a3d

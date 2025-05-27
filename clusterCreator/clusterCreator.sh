@@ -8,9 +8,9 @@ echo '🟢 Creating a cluster with kind'
 kind create cluster --config deployment.yml
 
 echo '🟢 Creating serving resources'
-kubectl apply -f serving-crds.yml --quiet
-kubectl apply -f serving-core.yml --quiet
-kubectl apply -f kourier.yaml --quiet
+kubectl apply -f serving-crds.yml 
+kubectl apply -f serving-core.yml 
+kubectl apply -f kourier.yaml 
 
 echo '🟢 Setting Kourier as default networking layer'
 kubectl patch configmap/config-network \
@@ -111,23 +111,9 @@ else
   exit 1
 fi
 
-# ---- Check kind node container ----
-echo "🔍 Checking for running kind node container..."
-KIND_CONTAINER=$(docker ps -a --filter "ancestor=kindest/node" --format '{{.ID}} {{.Image}} {{.Status}}' | head -n 1)
 
-if [[ -z "$KIND_CONTAINER" ]]; then
-  echo "❌ No container based on 'kindest/node' found."
-  exit 1
-else
-  CONTAINER_ID=$(echo "$KIND_CONTAINER" | awk '{print $1}')
-  IMAGE=$(echo "$KIND_CONTAINER" | awk '{print $2}')
-  STATUS=$(echo "$KIND_CONTAINER" | cut -d' ' -f3-)
-
-  echo "✅ Found kind node container:"
-  echo "   ➤ ID: $CONTAINER_ID"
-  echo "   ➤ Image: $IMAGE"
-  echo "   ➤ Status: $STATUS"
-fi
+echo 'Deploying Minio'
+kubectl apply -f minio-dev.yml
 
 echo '🎉 Cluster is configured correctly, enjoy :)'
 

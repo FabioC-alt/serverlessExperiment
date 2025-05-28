@@ -1,7 +1,10 @@
 # $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 # yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 specVersion: 0.36.0
-name: deployment-hello-py
-runtime: python
-created: 2025-05-28T16:45:00.283972511+02:00
-image: docker.io/fabiocalt/hello-world-py
+name: minio-func-ts
+runtime: typescript
+created: 2025-05-28T17:33:06.980346225+02:00
+build:
+  buildEnvs:
+  - name: BP_NODE_RUN_SCRIPTS
+    value: build

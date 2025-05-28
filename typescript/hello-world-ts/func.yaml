@@ -1,0 +1,16 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: hello-world-ts
+runtime: typescript
+image: docker.io/fabiocalt/hello-world-ts
+namespace: default
+created: 2025-05-28T17:27:35.37234829+02:00
+build:
+  builder: pack
+  buildEnvs:
+  - name: BP_NODE_RUN_SCRIPTS
+    value: build
+deploy:
+  namespace: default
+  image: docker.io/fabiocalt/hello-world-ts@sha256:0ce03af480b93f490814a9c6d49f5d15f46f722927b4a4590112cb95492cc66c

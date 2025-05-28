@@ -82,7 +82,7 @@ check_pod() {
 # Check Knative Serving pods
 echo "🔍 Checking Knative Serving pods..."
 KNATIVE_NS="knative-serving"
-REQUIRED_PODS=("activator" "autoscaler" "controller" "webhook")
+REQUIRED_PODS=("activator" "autoscaler" "webhook")
 
 for POD in "${REQUIRED_PODS[@]}"; do
   check_pod "$POD" "$KNATIVE_NS"

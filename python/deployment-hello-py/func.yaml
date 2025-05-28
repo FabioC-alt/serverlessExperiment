@@ -3,8 +3,7 @@
 specVersion: 0.36.0
 name: deployment-hello-py
 runtime: python
-created: 2025-05-26T17:08:00.366336669+02:00
+created: 2025-05-28T15:27:09.69353033+02:00
+image: docker.io/fabiocalt/hello-world-py
 
-
-image: fabiocalt/hello-world-py:latest
 

@@ -1,16 +1,10 @@
-# TypeScript HTTP Function
+# Node.js HTTP Function
 
-Welcome to your new TypeScript function project! The boilerplate function code can be found in [`index.ts`](./index.ts). This function will respond to incoming HTTP GET and POST requests.
+Welcome to your new Node.js function project! The boilerplate function code can be found in [`index.js`](./index.js). This function will respond to incoming HTTP GET and POST requests. This example function is written synchronously, returning a raw value. If your function performs any asynchronous execution, you can safely add the `async` keyword to the function, and return a `Promise`.
 
 ## Local execution
 
-To run locally
-
-```console
-npm install
-npm run build
-npm run local
-```
+After executing `npm install`, you can run this function locally by executing `npm run local`.
 
 The runtime will expose three endpoints.
 
@@ -43,7 +37,7 @@ The readiness and liveness endpoints use [overload-protection](https://www.npmjs
 
 ## The Function Interface
 
-The `src/index.ts` file may export a single function or a `Function`
+The `index.js` file may export a single function or a `Function`
 object. The `Function` object allows developers to add lifecycle hooks for
 initialization and shutdown, as well as providing a way to implement custom
 health checks.
@@ -123,10 +117,9 @@ export interface HealthCheck {
 ```
 
 By default, the health checks are bound to the `/health/liveness` and `/health/readiness` paths. You can override this by setting the `path` property on the `HealthCheck` object, or by setting the `LIVENESS_URL` and `READINESS_URL` environment variables.
-
 ## Testing
 
-This function project includes a [unit test](./test/unit.ts) and an [integration test](./test/integration.ts). Modify these, or add additional tests for your business logic.
+This function project includes a [unit test](./test/unit.js) and an [integration test](./test/integration.js). All `.js` files in the test directory are run.
 
 ```console
 npm test

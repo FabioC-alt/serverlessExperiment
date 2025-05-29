@@ -1,4 +1,4 @@
-const { Minio } = require('minio');
+const Minio = require('minio');
 
 /**
  * Your HTTP handling function, invoked with each request.

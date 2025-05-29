@@ -3,5 +3,11 @@
 specVersion: 0.36.0
 name: minio-node
 runtime: node
-created: 2025-05-29T10:57:13.378643779+02:00
 image: docker.io/fabiocalt/minio-node
+namespace: default
+created: 2025-05-29T10:57:13.378643779+02:00
+build:
+  builder: pack
+deploy:
+  namespace: default
+  image: docker.io/fabiocalt/minio-node@sha256:98654eaf6c97c905bd504f637ca050936167b204550a0798c77ab5b469598028

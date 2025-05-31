@@ -1,0 +1,23 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: hello-java
+runtime: springboot
+image: docker.io/fabiocalt/hello-world-java
+namespace: default
+created: 2025-05-31T16:26:11.259478017+02:00
+build:
+  builder: pack
+  buildEnvs:
+  - name: BP_NATIVE_IMAGE
+    value: "false"
+  - name: BP_JVM_VERSION
+    value: "21"
+  - name: BP_MAVEN_ACTIVE_PROFILES
+    value: native
+deploy:
+  namespace: default
+  image: docker.io/fabiocalt/hello-world-java@sha256:7b485d7f8b63ce44c87dd55aedb7afc23b027fb4456943c0482066591e8a3349
+  healthEndpoints:
+    liveness: /actuator/health
+    readiness: /actuator/health

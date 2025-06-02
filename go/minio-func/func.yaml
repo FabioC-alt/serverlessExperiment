@@ -10,4 +10,4 @@ build:
   builder: pack
 deploy:
   namespace: default
-  image: docker.io/fabiocalt/minio-func@sha256:c6e2f8e64527206cc968e77496b2b17331a88ae7dc821a91720d3ac135b35d09
+  image: docker.io/fabiocalt/minio-func@sha256:b94ef2d5cdac344639f67c40111f8e3ff9db5e662e490f5483b49bb643c31e23

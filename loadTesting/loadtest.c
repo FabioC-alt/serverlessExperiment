@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     CURLcode res;
     struct timespec start, end;
 
-    FILE *latency_file = fopen("latency_go_hello_coldStart_50_FabioPc.csv", "w");
+    FILE *latency_file = fopen("latency_go_minio_coldStart_50_FabioPc.csv", "w");
     if (!latency_file) {
         perror("Error opening output file");
         return 1;

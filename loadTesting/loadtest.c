@@ -34,13 +34,22 @@ int main(int argc, char *argv[]) {
     CURLcode res;
     struct timespec start, end;
 
+    FILE *latency_file = fopen("latency_results.txt", "w");
+    if (!latency_file) {
+        perror("Errore apertura file di output");
+        return 1;
+    }
+
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
 
     if (!curl) {
         fprintf(stderr, "Errore inizializzazione CURL\n");
+        fclose(latency_file);
         return 1;
     }
+
+    fprintf(latency_file, "iterazione; valoreNs; valoreMs");
 
     for (int i = 0; i < ITERATIONS; i++) {
         printf("Iterazione %d: sleep %d ms\n", i + 1, sleep_time);
@@ -48,17 +57,17 @@ int main(int argc, char *argv[]) {
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_NOBODY, 1L); // HEAD request più leggera
 
-        // Inizio cronometro
         clock_gettime(CLOCK_MONOTONIC, &start);
         res = curl_easy_perform(curl);
         clock_gettime(CLOCK_MONOTONIC, &end);
-        // Fine cronometro
 
         if (res != CURLE_OK) {
             fprintf(stderr, "Errore richiesta: %s\n", curl_easy_strerror(res));
         } else {
             long long latency_ns = diff_ns(start, end);
-            printf("Latenza: %lld ns (%.3f ms)\n", latency_ns, latency_ns / 1e6);
+            double latency_ms = latency_ns / 1e6;
+            printf("Latenza: %lld ns (%.3f ms)\n", latency_ns, latency_ms);
+            fprintf(latency_file, "%d; %lld; %.3f;\n", i + 1, latency_ns, latency_ms);
         }
 
         sleep_ms(sleep_time);
@@ -69,6 +78,9 @@ int main(int argc, char *argv[]) {
 
     curl_easy_cleanup(curl);
     curl_global_cleanup();
+    fclose(latency_file);
+
+    printf("Risultati salvati in 'latency_results.txt'\n");
     return 0;
 }
 

@@ -10,4 +10,4 @@ build:
   builder: pack
 deploy:
   namespace: default
-  image: fabiocalt/hello-world-go@sha256:ec9e02e567e82106c10b0e405bdb0b9a8a3539c96dee449c6914249e497a75d8
+  image: fabiocalt/hello-world-go@sha256:76844b5bf29bf946587651ba81476c98fe83dc9b3c1c279a633ae38a6f4c83b6

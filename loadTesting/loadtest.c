@@ -4,8 +4,7 @@
 #include <string.h>       // strcmp
 #include <curl/curl.h>
 #include <time.h>
-
-#define INITIAL_SLEEP_MS 100   // initial delay in milliseconds
+#define INITIAL_SLEEP_MS 90000   // initial delay in milliseconds
 
 // Compute the difference in nanoseconds between two timespec values
 long long diff_ns(struct timespec start, struct timespec end) {

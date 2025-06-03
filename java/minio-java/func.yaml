@@ -16,3 +16,5 @@ deploy:
   healthEndpoints:
     liveness: /actuator/health
     readiness: /actuator/health
+
+image: docker.io/fabiocalt/minio-java

@@ -1,5 +1,11 @@
 package functions;
 
+import io.minio.GetObjectArgs;
+import io.minio.PutObjectArgs;
+import io.minio.MinioClient;
+
+import java.nio.charset.StandardCharsets;         
+import java.io.ByteArrayInputStream;              
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

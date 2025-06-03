@@ -3,7 +3,7 @@
 specVersion: 0.36.0
 name: minio-java
 runtime: springboot
-created: 2025-05-31T17:49:50.761988879+02:00
+created: 2025-06-03T14:38:05.968832123+02:00
 build:
   buildEnvs:
   - name: BP_NATIVE_IMAGE
@@ -16,4 +16,3 @@ deploy:
   healthEndpoints:
     liveness: /actuator/health
     readiness: /actuator/health
-image: docker.io/fabiocalt/minio-java

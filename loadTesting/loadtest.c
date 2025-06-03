@@ -5,7 +5,7 @@
 #include <curl/curl.h>
 #include <time.h>
 
-#define INITIAL_SLEEP_MS 1000   // initial delay in milliseconds
+#define INITIAL_SLEEP_MS 9000   // initial delay in milliseconds
 
 // Compute the difference in nanoseconds between two timespec values
 long long diff_ns(struct timespec start, struct timespec end) {
@@ -19,8 +19,8 @@ void sleep_ms(int ms) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 4) {
-        fprintf(stderr, "Usage: %s <URL> <mode> <iterations>\n", argv[0]);
+    if (argc != 5) {
+        fprintf(stderr, "Usage: %s <URL> <mode> <iterations> <output_filename>\n", argv[0]);
         fprintf(stderr, "Mode: const | inc\n");
         return 1;
     }
@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
     const char *url = argv[1];
     const char *mode = argv[2];
     int iterations = atoi(argv[3]);
+    const char *output_filename = argv[4];
 
     if (strcmp(mode, "const") != 0 && strcmp(mode, "inc") != 0) {
         fprintf(stderr, "Invalid mode. Choose 'const' or 'inc'.\n");
@@ -45,7 +46,7 @@ int main(int argc, char *argv[]) {
     CURLcode res;
     struct timespec start, end;
 
-    FILE *latency_file = fopen("latency_go_minio_coldStart_50_FabioPc.csv", "w");
+    FILE *latency_file = fopen(output_filename, "w");
     if (!latency_file) {
         perror("Error opening output file");
         return 1;
@@ -92,7 +93,7 @@ int main(int argc, char *argv[]) {
     curl_global_cleanup();
     fclose(latency_file);
 
-    printf("Results saved to 'latency_results.txt'\n");
+    printf("Results saved to '%s'\n", output_filename);
     return 0;
 }
 

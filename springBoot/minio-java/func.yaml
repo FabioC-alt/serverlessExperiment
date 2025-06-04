@@ -17,7 +17,7 @@ build:
     value: native
 deploy:
   namespace: default
-  image: docker.io/fabiocalt/minio-springboot@sha256:78b425c6a2ef5a07c89da8a660f96b2d467f93c40a4dcdb4239cbb7b18849210
+  image: docker.io/fabiocalt/minio-springboot@sha256:632a6a8de7d44ab55b7fbbef060193b899633dc4fd078caa05d5cff02b1c9183
   healthEndpoints:
     liveness: /actuator/health
     readiness: /actuator/health

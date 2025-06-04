@@ -60,9 +60,14 @@
     <dependency>
     	<groupId>joda-time</groupId>
     	<artifactId>joda-time</artifactId>
-    	<version>2.10.14</version>
+    	<version>2.12.5</version>
     </dependency>
 
+<dependency>
+    <groupId>com.fasterxml.jackson.datatype</groupId>
+    <artifactId>jackson-datatype-joda</artifactId>
+    <version>2.15.2</version> <!-- match your jackson version -->
+</dependency>
  </dependencies>
   <build>
     <pluginManagement>

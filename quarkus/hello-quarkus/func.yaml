@@ -1,0 +1,22 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: hello-quarkus
+runtime: quarkus
+image: docker.io/fabiocalt/hello-quarkus
+namespace: default
+created: 2025-06-04T11:01:38.000810624+02:00
+build:
+  builder: pack
+  buildEnvs:
+  - name: BP_NATIVE_IMAGE
+    value: "false"
+  - name: BP_JVM_VERSION
+    value: "21"
+  - name: MAVEN_S2I_ARTIFACT_DIRS
+    value: target/quarkus-app
+  - name: S2I_SOURCE_DEPLOYMENTS_FILTER
+    value: lib quarkus-run.jar app quarkus
+deploy:
+  namespace: default
+  image: docker.io/fabiocalt/hello-quarkus@sha256:371b6a75b4cb6dddd067a8806b504b59e21cb767716aabbb438d2a5f92b3e480

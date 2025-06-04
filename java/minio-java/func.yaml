@@ -3,8 +3,11 @@
 specVersion: 0.36.0
 name: minio-java
 runtime: springboot
+image: docker.io/fabiocalt/minio-java
+namespace: default
 created: 2025-06-03T14:38:05.968832123+02:00
 build:
+  builder: pack
   buildEnvs:
   - name: BP_NATIVE_IMAGE
     value: "false"
@@ -13,8 +16,8 @@ build:
   - name: BP_MAVEN_ACTIVE_PROFILES
     value: native
 deploy:
+  namespace: default
+  image: docker.io/fabiocalt/minio-java@sha256:e65e842b34127307ae61a851aa716195943c7e4a8e37b377c3136b524afb31c2
   healthEndpoints:
     liveness: /actuator/health
     readiness: /actuator/health
-
-image: docker.io/fabiocalt/minio-java

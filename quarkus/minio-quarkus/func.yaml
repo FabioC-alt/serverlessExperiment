@@ -19,4 +19,4 @@ build:
     value: lib quarkus-run.jar app quarkusi
 deploy:
   namespace: default
-  image: docker.io/fabiocalt/minio-java@sha256:5584a8ad81822a8d3cbc6f37b9db9a27a27a8c932537308d486a3b4ed48a8254
+  image: docker.io/fabiocalt/minio-java@sha256:479294d24b64960e67c0f19b8f98c3e056ed108aad59e3cb9ceaa7b06a10849c

@@ -5,7 +5,7 @@ name: hello-quarkus
 runtime: quarkus
 image: docker.io/fabiocalt/hello-quarkus
 namespace: default
-created: 2025-06-04T11:01:38.000810624+02:00
+created: 2025-06-04T16:39:31.967744523+02:00
 build:
   builder: pack
   buildEnvs:
@@ -19,4 +19,4 @@ build:
     value: lib quarkus-run.jar app quarkus
 deploy:
   namespace: default
-  image: docker.io/fabiocalt/hello-quarkus@sha256:371b6a75b4cb6dddd067a8806b504b59e21cb767716aabbb438d2a5f92b3e480
+  image: docker.io/fabiocalt/hello-quarkus@sha256:2959d25371a6187d16c9cb19aab3f17629864cebf0e40d1949ba9be20fd8aec6

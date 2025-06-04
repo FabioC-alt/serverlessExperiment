@@ -3,8 +3,11 @@
 specVersion: 0.36.0
 name: minio-quarkus
 runtime: quarkus
-created: 2025-06-04T11:11:30.295185281+02:00
+image: docker.io/fabiocalt/minio-java
+namespace: default
+created: 2025-06-04T15:39:05.691498357+02:00
 build:
+  builder: pack
   buildEnvs:
   - name: BP_NATIVE_IMAGE
     value: "false"
@@ -13,6 +16,7 @@ build:
   - name: MAVEN_S2I_ARTIFACT_DIRS
     value: target/quarkus-app
   - name: S2I_SOURCE_DEPLOYMENTS_FILTER
-    value: lib quarkus-run.jar app quarkus
-
-image: docker.io/fabiocalt/minio-quarkus
+    value: lib quarkus-run.jar app quarkusi
+deploy:
+  namespace: default
+  image: docker.io/fabiocalt/minio-java@sha256:5584a8ad81822a8d3cbc6f37b9db9a27a27a8c932537308d486a3b4ed48a8254

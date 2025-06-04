@@ -1,76 +1,93 @@
 package functions;
 
-import io.minio.*;
-import io.minio.errors.*;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.*;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.time.ZonedDateTime;
-import java.util.logging.Logger;
+import io.quarkus.funqy.Funq;
+import io.minio.MinioClient;
+import io.minio.GetObjectArgs;
+import io.minio.PutObjectArgs;
+import io.minio.errors.MinioException;
 
-@Path("/")
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.Instant;
+
+/**
+ * Your Function class
+ */
 public class Function {
 
-    private static final Logger LOGGER = Logger.getLogger(Function.class.getName());
+    private static final String ENDPOINT = "10.244.1.10";
+    private static final int PORT = 9000;
+    private static final String ACCESS_KEY = "minioadmin";
+    private static final String SECRET_KEY = "minioadmin123";
+    private static final boolean USE_SSL = false;
+    private static final String BUCKET = "mybucket";
+    private static final String OBJECT = "file.txt";
 
-    private final String endpoint = "http://10.244.1.10:9000";
-    private final String accessKey = "minioadmin";
-    private final String secretKey = "minioadmin123";
-    private final String bucketName = "mybucket";
-    private final String objectName = "file.txt";
-
-    @POST
-    @Consumes(MediaType.WILDCARD)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response handle(String body) {
+    @Funq
+    public Output function(Input input) {
         try {
             MinioClient minioClient = MinioClient.builder()
-                .endpoint(endpoint)
-                .credentials(accessKey, secretKey)
+                .endpoint(ENDPOINT, PORT, USE_SSL)
+                .credentials(ACCESS_KEY, SECRET_KEY)
                 .build();
 
+            // Try to get existing content
             byte[] existingContent;
-
-            try (InputStream is = minioClient.getObject(
+            try (InputStream objectStream = minioClient.getObject(
                     GetObjectArgs.builder()
-                        .bucket(bucketName)
-                        .object(objectName)
+                        .bucket(BUCKET)
+                        .object(OBJECT)
                         .build())) {
-                existingContent = is.readAllBytes();
-            } catch (Exception e) {
-                LOGGER.info("Object not found or unreadable. Creating new one.");
+
+                existingContent = readAllBytes(objectStream);
+
+            } catch (MinioException | IOException e) {
+                // If object does not exist or error occurs, treat content as empty
                 existingContent = new byte[0];
             }
 
-            String timestamp = ZonedDateTime.now().toString() + "\n";
-            byte[] updatedContent = concat(existingContent, timestamp.getBytes(StandardCharsets.UTF_8));
+            // Append new timestamp
+            String timestamp = Instant.now().toString() + "\n";
+            byte[] updatedContent = concatenate(existingContent, timestamp.getBytes());
 
-            try (ByteArrayInputStream bais = new ByteArrayInputStream(updatedContent)) {
+            // Upload updated object
+            try (ByteArrayInputStream inputStream = new ByteArrayInputStream(updatedContent)) {
                 minioClient.putObject(
                     PutObjectArgs.builder()
-                        .bucket(bucketName)
-                        .object(objectName)
-                        .stream(bais, updatedContent.length, -1)
+                        .bucket(BUCKET)
+                        .object(OBJECT)
+                        .stream(inputStream, updatedContent.length, -1)
                         .contentType("text/plain")
-                        .build()
-                );
+                        .build());
             }
 
-            return Response.ok("Timestamp appended to file.txt successfully.\n").build();
+            return new Output("Timestamp appended successfully");
 
         } catch (Exception e) {
-            LOGGER.severe("Failed to process request: " + e.getMessage());
-            return Response.serverError().entity("Internal Server Error\n").build();
+            return new Output("Error: " + e.getMessage());
         }
     }
 
-    private byte[] concat(byte[] a, byte[] b) throws IOException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        outputStream.write(a);
-        outputStream.write(b);
-        return outputStream.toByteArray();
+    // Utility method to concatenate two byte arrays
+    private byte[] concatenate(byte[] a, byte[] b) throws IOException {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            outputStream.write(a);
+            outputStream.write(b);
+            return outputStream.toByteArray();
+        }
+    }
+
+    // Utility method to read all bytes from an InputStream
+    private byte[] readAllBytes(InputStream input) throws IOException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        byte[] data = new byte[8192];
+        int nRead;
+        while ((nRead = input.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+        return buffer.toByteArray();
     }
 }
 

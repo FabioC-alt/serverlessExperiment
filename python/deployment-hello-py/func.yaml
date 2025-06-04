@@ -1,9 +1,0 @@
-# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
-# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
-specVersion: 0.36.0
-name: deployment-hello-py
-runtime: python
-image: docker.io/fabiocalt/hello-py-fabio
-created: 2025-06-03T15:40:14.780536012+02:00
-build:
-  builder: pack

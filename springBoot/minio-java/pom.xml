@@ -57,7 +57,13 @@
     	<artifactId>minio</artifactId>
     	<version>8.5.17</version>
     </dependency>
-  </dependencies>
+    <dependency>
+    	<groupId>joda-time</groupId>
+    	<artifactId>joda-time</artifactId>
+    	<version>2.10.14</version>
+    </dependency>
+
+ </dependencies>
   <build>
     <pluginManagement>
       <plugins>

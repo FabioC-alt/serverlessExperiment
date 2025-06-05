@@ -1,6 +1,6 @@
 notify-send "Inizio Tests hello Cold Start"
 
-./loadtestCS http://hello-quarkus.default.127.0.0.1.sslip.io coonst 50  latency_javaQuarkus_hello_coldStart_50_FabioPc.csv
+./loadtestCS http://hello-quarkus.default.127.0.0.1.sslip.io const 50  latency_javaQuarkus_hello_coldStart_50_FabioPc.csv
 
 notify-send "Inizio Test minio Cold Start"
 

@@ -10,4 +10,4 @@ build:
   builder: pack
 deploy:
   namespace: default
-  image: docker.io/fabiocalt/hello-world-node@sha256:b7e9c718c21935fe196f32436c596874208bdf5ae3a7e71f153382ad159db41f
+  image: docker.io/fabiocalt/hello-world-node@sha256:b25a2f27d99599e01b00752572a042bb1166cbf465cdc022b0aafaf534057af2

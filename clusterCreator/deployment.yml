@@ -10,4 +10,4 @@ nodes:
   - containerPort: 31443
     hostPort: 443
 - role: worker
-
+- role: worker

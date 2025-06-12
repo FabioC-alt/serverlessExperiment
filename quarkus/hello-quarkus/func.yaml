@@ -19,4 +19,4 @@ build:
     value: lib quarkus-run.jar app quarkus
 deploy:
   namespace: default
-  image: docker.io/fabiocalt/hello-quarkus@sha256:2959d25371a6187d16c9cb19aab3f17629864cebf0e40d1949ba9be20fd8aec6
+  image: docker.io/fabiocalt/hello-quarkus@sha256:b8890b77d5cd085246e433b576701972e92816003fc489b15e522cab62392922

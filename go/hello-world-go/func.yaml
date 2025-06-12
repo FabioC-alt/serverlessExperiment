@@ -3,11 +3,11 @@
 specVersion: 0.36.0
 name: hello-world-go
 runtime: go
-image: docker.io/fabiocalt/hello-world-go
+registry: docker.io/fabiocalt
 namespace: default
-created: 2028-06-12T16:55:22.222348029+02:00
+created: 2025-06-12T17:21:14.033663365+02:00
 build:
   builder: pack
 deploy:
   namespace: default
-  image: docker.io/fabiocalt/hello-world-go@sha256:c5c034d4140f02713d0b1fff9faebf3e3d3d3a06526db3373a6bf037b3ac2eac
+  image: index.docker.io/fabiocalt/hello-world-go@sha256:d9f625a18aab7761cc16b371be5b0cdd26a5723aab2391a41feadafda172bdaa

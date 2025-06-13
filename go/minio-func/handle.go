@@ -16,7 +16,7 @@ import (
 // Handle an HTTP Request.
 func Handle(w http.ResponseWriter, r *http.Request) {
 
-	endpoint := "10.244.1.10:9000"
+	endpoint := "10.244.1.14:9000"
 	accessKeyID := "minioadmin"
 	secretAccessKey := "minioadmin123"
 	useSSL := false

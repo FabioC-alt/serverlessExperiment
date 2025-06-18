@@ -1,7 +1,7 @@
 # $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 # yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 specVersion: 0.36.0
-name: hello-world-go
+name: hello-world-go-otel
 runtime: go
 registry: docker.io/fabiocalt
 namespace: default
@@ -10,4 +10,4 @@ build:
   builder: pack
 deploy:
   namespace: default
-  image: index.docker.io/fabiocalt/hello-world-go@sha256:6efeac4916ef7c4c86ddfaea419ed66c0b680a9979ceb810b062ddde9186a463
+  image: index.docker.io/fabiocalt/hello-world-go-otel@sha256:98e59c6cb6b5968b8d645cfe7d0278a9758bddf5368f06865868a80dae17f6a1

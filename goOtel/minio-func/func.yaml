@@ -1,13 +1,13 @@
 # $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 # yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 specVersion: 0.36.0
-name: hello-world-go
+name: minio-func
 runtime: go
-registry: docker.io/fabiocalt
+image: docker.io/fabiocalt/minio-func
 namespace: default
-created: 2025-06-12T17:21:14.033663365+02:00
+created: 2025-05-26T12:56:40.79554359+02:00
 build:
   builder: pack
 deploy:
   namespace: default
-  image: index.docker.io/fabiocalt/hello-world-go@sha256:6efeac4916ef7c4c86ddfaea419ed66c0b680a9979ceb810b062ddde9186a463
+  image: docker.io/fabiocalt/minio-func@sha256:60eb4146681378fe3c2ca4d4288af9a01a489c453ed7c2fd47ccb6e86cbe3904
